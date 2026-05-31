@@ -8,9 +8,6 @@ class DefectClassifier:
         self.model = SVC(kernel=kernel, C=C, probability=True)
 
     def train(self, X_train, y_train):
-        """
-        Trains the SVM classifier using the extracted features.
-        """
         self.model.fit(X_train, y_train)
 
     def predict(self, X):

@@ -5,7 +5,6 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 class PerformanceEvaluator:
     @staticmethod
     def compute_metrics(y_true, y_pred):
-        
         metrics = {
             'accuracy': accuracy_score(y_true, y_pred),
             'precision': precision_score(y_true, y_pred, average='binary', pos_label=1),
@@ -16,11 +15,9 @@ class PerformanceEvaluator:
 
     @staticmethod
     def plot_confusion_matrix(y_true, y_pred, output_path='confusion_matrix.png'):
-
         cm = confusion_matrix(y_true, y_pred)
         plt.figure(figsize=(6, 5))
         
-        # Labels: 0 = Normal, 1 = Defective
         sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', 
                     xticklabels=['Normal', 'Defective'], 
                     yticklabels=['Normal', 'Defective'])

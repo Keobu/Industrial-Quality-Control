@@ -4,7 +4,7 @@ import numpy as np
 class IndustrialPreprocessor:
     def __init__(self, target_size=(256, 256)):
         self.target_size = target_size
-        # Initialize CLAHE for local contrast enhancement
+        # Adaptive histogram equalization to normalize factory lighting variations
         self.clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
 
     def resize(self, image):
@@ -16,15 +16,14 @@ class IndustrialPreprocessor:
         return image
 
     def remove_noise(self, image, kernel_size=(5, 5)):
-        # Gaussian blur for high-frequency noise reduction
+        # Gaussian blur filters out high-frequency industrial camera noise
         return cv2.GaussianBlur(image, kernel_size, 0)
 
     def enhance_contrast(self, image):
-        # Apply CLAHE to highlight surface defects like cracks or scratches
+        # CLAHE sharpens surface scratches and micro-cracks
         return self.clahe.apply(image)
 
     def normalize(self, image):
-        # Normalize pixel values to [0, 1] range
         return image.astype(np.float32) / 255.0
 
     def pipeline(self, image_path):
@@ -42,4 +41,4 @@ class IndustrialPreprocessor:
         return img_normalized
 
 if __name__ == "__main__":
-    print("Preprocessor module initialized successfully.")
+    print("Correct Preprocessor module initialized.")
